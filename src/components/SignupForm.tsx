@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import TextInput from "./TextInput";
+import TextInput from "./Input";
 import Button from "./Button";
 
 function SignupForm() {

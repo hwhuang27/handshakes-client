@@ -1,41 +1,94 @@
 import { Link } from 'react-router-dom';
-import TextInput from "./TextInput";
-import Button from "./Button";
+import Input from './Input';
+import Button from './Button';
+import styled from 'styled-components';
+
+const StyledForm = styled.form`
+    background-color: white;
+    padding: 20px 40px;
+    border-radius: 24px;
+`
+const FormContentWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+const ForgotWrapper = styled.div`
+  text-align: right;
+  margin: 2px 0 12px;
+`
+const ForgotLink = styled(Link)`
+  font-size: 14px;
+  color: #609966;
+  transition: all .1s ease-in-out;
+  &:hover {
+  color: #40513B;
+}
+`
+const SignupText = styled.p`
+  display: inline;
+  font-size: 16px;
+`
+const SignupLink = styled(Link)`
+  font-size: 16px;
+  color: #609966;
+  margin-left: 6px;
+  transition: all .1s ease-in-out;
+
+  &:hover {
+    color: #40513B;
+  }
+`
+const LineBreak = styled.p`
+    color: #64748b;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #64748b;
+    line-height: 0.1em;
+    margin: 24px 0 20px;
+`
+const LineBreakSpan = styled.span`
+    background: #fff;
+    padding: 8px;
+`
 
 function LoginForm() {
     return (
-        <form>
+        <StyledForm>
             <img src="/logo64.png" alt="Logo" />
-            
-            <TextInput
-                label='Email'
-                type='email'
-                id='email'
-                name='email'
-            />
-            <TextInput
-                label='Password'
-                type='password'
-                id='password'
-                name='password'
-            />
 
-            <div>
-                <Link to='/'>Forgot password?</Link>
-            </div>
+            <FormContentWrapper>
+                <Input
+                    label='Email'
+                    type='email'
+                    id='email'
+                    name='email'
+                />
+                <Input
+                    label='Password'
+                    type='password'
+                    id='password'
+                    name='password'
+                />
 
-            <Button type='submit' text='Login' />
+                <ForgotWrapper>
+                    <ForgotLink to='/login'>Forgot Password?</ForgotLink>
+                </ForgotWrapper>
 
-            <div>
-                <p>Don't have an account?</p>
-                <Link to='/register'>Sign Up</Link>
-            </div>
+                <Button type='submit' text='Login' />
 
-            <p><span>Or try the</span></p>
-            <Button type='button' text='Demo User' />
+                <div>
+                    <SignupText>Don't have an account?</SignupText>
+                    <SignupLink to='/register'>Sign Up</SignupLink>
+                </div>
 
-            {/* <p><span>Or login with</span></p> */}
-        </form>
+                <LineBreak><LineBreakSpan>Alternatively</LineBreakSpan></LineBreak>
+                <Button type='button' text='Try Demo User' />
+
+                {/* <p><span>Or login with</span></p> */}
+            </FormContentWrapper>
+        </StyledForm>
     )
 }
 
