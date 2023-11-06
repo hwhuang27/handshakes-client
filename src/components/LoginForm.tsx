@@ -4,23 +4,35 @@ import Button from './Button';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
+    font-family: 'Coming Soon', cursive;
     background-color: white;
     padding: 20px 40px;
+    border: 10px outset #9DC08B;
     border-radius: 24px;
+`
+const HeaderWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`
+const HeaderText = styled.p`
+    color: #739072;
+    font-size: 40px;
+    letter-spacing: 0.1rem;
+    margin: 8px 0 16px;
 `
 const FormContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
 `
-
 const ForgotWrapper = styled.div`
   text-align: right;
-  margin: 2px 0 12px;
+  margin: 6px 0 12px;
 `
 const ForgotLink = styled(Link)`
-  font-size: 14px;
+  font-size: 16px;
   color: #609966;
-  transition: all .1s ease-in-out;
+  transition: all .15s ease-in-out;
+
   &:hover {
   color: #40513B;
 }
@@ -30,10 +42,10 @@ const SignupText = styled.p`
   font-size: 16px;
 `
 const SignupLink = styled(Link)`
-  font-size: 16px;
+  font-size: 17px;
   color: #609966;
   margin-left: 6px;
-  transition: all .1s ease-in-out;
+  transition: all .15s ease-in-out;
 
   &:hover {
     color: #40513B;
@@ -56,8 +68,11 @@ const LineBreakSpan = styled.span`
 function LoginForm() {
     return (
         <StyledForm>
-            <img src="/logo64.png" alt="Logo" />
 
+            <HeaderWrapper>
+                <HeaderText>Messenger</HeaderText>
+            </HeaderWrapper>
+            
             <FormContentWrapper>
                 <Input
                     label='Email'
@@ -86,7 +101,7 @@ function LoginForm() {
                 <LineBreak><LineBreakSpan>Alternatively</LineBreakSpan></LineBreak>
                 <Button type='button' text='Try Demo User' />
 
-                {/* <p><span>Or login with</span></p> */}
+                {/* <LineBreak><LineBreakSpan>Otherwise</LineBreakSpan></LineBreak> */}
             </FormContentWrapper>
         </StyledForm>
     )

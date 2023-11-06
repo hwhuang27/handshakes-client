@@ -1,5 +1,4 @@
 import { Navigate } from 'react-router-dom';
-// import '../styles/Login.css';
 
 let user = false;
 function App() {
