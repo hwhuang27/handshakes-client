@@ -19,6 +19,11 @@ const HeaderText = styled.p`
     font-size: 40px;
     letter-spacing: 0.1rem;
     margin: 8px 0 16px;
+    transition: all .1s ease-in-out;
+
+    &:hover {
+    scale: 1.05;
+}
 `
 const FormContentWrapper = styled.div`
     display: flex;
@@ -33,8 +38,8 @@ const ForgotLink = styled(Link)`
   color: #609966;
   transition: all .15s ease-in-out;
 
-  &:hover {
-  color: #40513B;
+    &:hover {
+    color: #40513B;
 }
 `
 const SignupText = styled.p`
@@ -64,7 +69,6 @@ const LineBreakSpan = styled.span`
     background: #fff;
     padding: 8px;
 `
-
 function LoginForm() {
     return (
         <StyledForm>

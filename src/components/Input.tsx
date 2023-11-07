@@ -1,10 +1,11 @@
+import { ChangeEventHandler } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
     label: string,
     type: string,
     id: string,
-    name: string,
+    onChange: ChangeEventHandler,
 }
 
 const Wrapper = styled.div`
@@ -34,15 +35,15 @@ const StyledInput = styled.input`
 }
 `
 
-function Input({label, type, id, name} : InputProps)
+function Input({label, type, id, onChange} : InputProps)
 {
     return(
         <Wrapper>
             <StyledLabel htmlFor={id}>{label}</StyledLabel>
             <StyledInput
                 type={type}
-                name={name}
                 id={id}
+                onChange={onChange}
                 ></StyledInput>
       </Wrapper>
     )

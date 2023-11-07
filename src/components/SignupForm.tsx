@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, ChangeEvent } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import Button from './Button';
 import styled from 'styled-components';
@@ -39,16 +39,63 @@ const LoginLink = styled(Link)`
     color: #40513B;
   }
 `
+const ErrorMessage = styled.p`
+    color: #ef4444;
+    margin: 8px 0;
+`
 
 function SignupForm() {
-    // const [firstName, setFirstName] = useState("");
-    // const [lastName, setLastName] = useState("");
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [confirmPass, setConfirmPass] = useState("");
+    const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPass, setConfirmPass] = useState("");
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+            if (firstName === "" || lastName === "" || email === "" || password === "" || confirmPass === "") {
+                setError('Fields cannot be empty');
+                throw new Error('Fields cannot be empty');
+            } else if (password !== confirmPass) {
+                setError('Passwords do not match');
+                throw new Error('Passwords do not match');
+            }
+            let res = await fetch(`https://messenger-api-production.up.railway.app/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: email,
+                    first_name: firstName,
+                    last_name: lastName,
+                    password: password,
+                    confirm_password: confirmPass,
+                }),
+            });
+
+            if(res.status === 200){
+                setError("");
+                navigate("/login");
+                console.log(`User registration successful.`);
+            } else if (res.status === 400){
+                setError(`This email is already registered!`);
+                console.log(`Email is already registered.`);
+            } else {
+                setError(`Server error occured!`)
+                console.log(`Server error occurred.`);
+            }
+
+        } catch(err){
+            console.log(err);
+        }
+    }       
 
     return (
-        <StyledForm>
+        <StyledForm onSubmit={handleSubmit}>
             <HeaderWrapper>
                 <HeaderText>Sign Up</HeaderText>
             </HeaderWrapper>
@@ -58,35 +105,37 @@ function SignupForm() {
                     label='Email'
                     type='email'
                     id='email'
-                    name='email'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
                 <Input
                     label='First Name'
                     type='text'
                     id='firstName'
-                    name='firstName'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
                 />
                 <Input
                     label='Last Name'
                     type='text'
                     id='lastName'
-                    name='lastName'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
                 />
                 <Input
                     label='Password'
                     type='password'
                     id='password'
-                    name='password'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 />
                 <Input
                     label='Confirm Password'
                     type='password'
                     id='confirmPassword'
-                    name='confirmPassword'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setConfirmPass(e.target.value)}
                 />
                 
                 {/* Avatar dropdown component goes here */}
 
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+  
                 <Button type='submit' text='Sign Up' />
 
                 <div>
