@@ -1,5 +1,4 @@
 import AuthForm from '../components/AuthForm';
-import '../styles/Register.css';
 
 function Register() {
   return (

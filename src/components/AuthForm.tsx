@@ -3,6 +3,13 @@ import SignupForm from './SignupForm';
 import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+  
 body {
   color: #40513B;
   background-color: #8EC3B0;

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `
 const StyledLabel = styled.label`
   text-align: left;
-  margin: 12px 0 2px;
+  margin: 12px 0 0;
   font-size: 18px;
   letter-spacing: 1px;
   color: #40513B;
