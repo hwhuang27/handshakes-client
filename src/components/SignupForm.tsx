@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import Button from './Button';
@@ -53,7 +53,7 @@ function SignupForm() {
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             if (firstName === "" || lastName === "" || email === "" || password === "" || confirmPass === "") {
@@ -63,7 +63,7 @@ function SignupForm() {
                 setError('Passwords do not match');
                 throw new Error('Passwords do not match');
             }
-            let res = await fetch(`https://messenger-api-production.up.railway.app/auth/register`, {
+            const res = await fetch(`https://messenger-api-production.up.railway.app/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

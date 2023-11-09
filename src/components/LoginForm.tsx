@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import Button from './Button';
 import styled from 'styled-components';
@@ -69,10 +70,50 @@ const LineBreakSpan = styled.span`
     background: #fff;
     padding: 8px;
 `
+const ErrorMessage = styled.p`
+    color: #ef4444;
+    margin: 0 0 4px;
+`
 function LoginForm() {
-    return (
-        <StyledForm>
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
+    const navigate = useNavigate();
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            if (email === "" || password === "") {
+                setError('Fields cannot be empty');
+                throw new Error('Fields cannot be empty');
+            }
+            const res = await fetch(`https://messenger-api-production.up.railway.app/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                }),
+            });
+            
+            if(res.status === 200){
+                const result = await res.json();
+                setError("");
+                localStorage.setItem("token", result.token);
+                navigate('/');
+            } else{
+                setError('Invalid username or password');
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    return (
+        <StyledForm onSubmit={handleSubmit}>
             <HeaderWrapper>
                 <HeaderText>Messenger</HeaderText>
             </HeaderWrapper>
@@ -82,18 +123,20 @@ function LoginForm() {
                     label='Email'
                     type='email'
                     id='email'
-                    name='email'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
                 <Input
                     label='Password'
                     type='password'
                     id='password'
-                    name='password'
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 />
 
                 <ForgotWrapper>
                     <ForgotLink to='/login'>Forgot Password?</ForgotLink>
                 </ForgotWrapper>
+
+                {error && <ErrorMessage>{error}</ErrorMessage>}
 
                 <Button type='submit' text='Login' />
 
@@ -105,7 +148,6 @@ function LoginForm() {
                 <LineBreak><LineBreakSpan>Alternatively</LineBreakSpan></LineBreak>
                 <Button type='button' text='Try Demo User' />
 
-                {/* <LineBreak><LineBreakSpan>Otherwise</LineBreakSpan></LineBreak> */}
             </FormContentWrapper>
         </StyledForm>
     )
