@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
+
 const Container = styled.div`
     min-height: 100vh;
     border-right: 2px solid #9DC08B;
@@ -10,10 +11,13 @@ const Container = styled.div`
 `
 
 const Header = styled.p`
+    color: #609966;
     font-size: 44px;
     font-weight: 700;
     font-style: italic;
-    margin-bottom: 30px;
+    margin: 24px 0 0;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #9DC08B;
 `
 const NavItem = styled(Link)`
   font-size: 24px;

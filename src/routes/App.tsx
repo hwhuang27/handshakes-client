@@ -1,10 +1,10 @@
 import styled, { createGlobalStyle} from 'styled-components';
 import '../components/App.css';
-import Sidebar from '../components/Sidebar'
+import NavBar from '../components/Navbar'
 
 const GlobalStyle = createGlobalStyle`
 *{
-    font-family: 'Lato', sans-serif;    
+    font-family: 'Lato', sans-serif;  
     box-sizing: border-box;
     list-style-type: none;
 }
@@ -32,21 +32,24 @@ const PageWrapper = styled.div`
     flex-direction: column;
 `
 const ContentWrapper = styled.div`
-display: grid;
-grid-template-columns: minmax(300px, 1fr) 3fr;
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) 6fr;
 `
 
-// const Sidebar = styled.div`
-// padding: 0;
-// margin: 0;
-// `
-
 function App() {
+    const firstName = `David`;
+    const lastName = `Huang`;
+    const avatar = `prawn`;
+
     return (
         <PageWrapper>
             <GlobalStyle />
+            <NavBar 
+                firstName={firstName} 
+                lastName={lastName}
+                avatar={avatar}
+            />
             <ContentWrapper>
-                <Sidebar/>
 
             </ContentWrapper>
         </PageWrapper>
@@ -54,27 +57,3 @@ function App() {
 }
 
 export default App;
-
-// const user = localStorage.getItem("token");
-// {
-//     !user && (
-//         <Navigate to="/login" replace={true} />
-//     )
-// }
-
-// body {
-//     background - color: #F2F2F2;
-//     background - image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='29' height='29' viewBox='0 0 100 100'%3E%3Crect x='0' y='0' width='20' height='20' fill-opacity='0.5' fill='%23BCEAD5'/%3E%3C/svg%3E");
-// }
-
-// const NavBar = styled.ul`
-//     display: flex;
-//     margin: 0;
-//     padding: 0;
-// `
-// const NavItem = styled.li`
-//     margin: 12px 24px;
-// `
-// const ChatWindow = styled.div`
-//     background-color: blue;
-// `

@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface ButtonProps {
-    type: 'button' | 'submit' | 'reset' | undefined,
-    text: string,
-}
 
 const StyledButton = styled.button`
   margin: 4px 0 12px;
@@ -27,6 +23,10 @@ const StyledButton = styled.button`
   outline: none;
   }
 `
+interface ButtonProps {
+    type: 'button' | 'submit' | 'reset' | undefined,
+    text: string,
+}
 
 function Button({type, text} : ButtonProps) {
 
