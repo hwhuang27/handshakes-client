@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle} from 'styled-components';
-import '../components/App.css';
-import NavBar from '../components/Navbar'
+import Navbar from '../components/Navbar'
+import Sidebar from '../components/Sidebar'
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -33,7 +33,7 @@ const PageWrapper = styled.div`
 `
 const ContentWrapper = styled.div`
     display: grid;
-    grid-template-columns: minmax(260px, 1fr) 6fr;
+    grid-template-columns: minmax(300px, 1fr) 6fr;
 `
 
 function App() {
@@ -44,12 +44,17 @@ function App() {
     return (
         <PageWrapper>
             <GlobalStyle />
-            <NavBar 
+            <Navbar 
                 firstName={firstName} 
                 lastName={lastName}
                 avatar={avatar}
             />
             <ContentWrapper>
+                <Sidebar
+                    firstName={firstName}
+                    lastName={lastName}
+                    avatar={avatar}
+                />
 
             </ContentWrapper>
         </PageWrapper>

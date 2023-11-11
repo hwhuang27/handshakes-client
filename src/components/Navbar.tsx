@@ -11,13 +11,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
 }
 `
-const NavigationBar = styled.nav`
+const Container = styled.nav`
     background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #9DC08B;
 `
 const LeftGroup = styled.div`
     display: flex; 
@@ -49,7 +49,7 @@ const NavHeader = styled.p`
     font-weight: 700;
     font-style: italic;
     letter-spacing: 0.1rem;
-    color: #609966;
+    color: #65a30d;
     user-select: none;
     margin: 4px 0;
 `
@@ -60,7 +60,6 @@ const RightGroup = styled.div`
     align-items: center;
     margin-right: 20px;
 `
-
 const NavName = styled.p`
     font-size: 22px;
     font-weight: bold;
@@ -70,7 +69,6 @@ const NavName = styled.p`
 `
 const Avatar = styled.img`
 `
-
 interface NavProps {
     firstName: string,
     lastName: string,
@@ -81,8 +79,7 @@ function NavBar({firstName, lastName, avatar}: NavProps) {
     const imagePath = `src/assets/${avatar}.png`
     
     return (
-        <NavigationBar>
-            
+        <Container>
             <GlobalStyle />
 
             <LeftGroup>
@@ -98,7 +95,7 @@ function NavBar({firstName, lastName, avatar}: NavProps) {
                 <StyledLink to='/login'>Logout</StyledLink>
             </RightGroup>
 
-        </NavigationBar>
+        </Container>
     )
 }
 

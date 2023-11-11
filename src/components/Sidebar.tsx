@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+
+import UserBox from './UserBox'
 
 const Container = styled.div`
     min-height: 100vh;
@@ -10,36 +11,34 @@ const Container = styled.div`
     flex-direction: column;
 `
 
-const Header = styled.p`
-    color: #609966;
-    font-size: 44px;
-    font-weight: 700;
-    font-style: italic;
-    margin: 24px 0 0;
-    padding-bottom: 30px;
-    border-bottom: 2px solid #9DC08B;
-`
-const NavItem = styled(Link)`
-  font-size: 24px;
-  font-weight: 400;
-  color: #609966;
-  padding: 20px 0;
-  margin: 0;
-  transition: all .1s ease-in-out;
-
-    &:hover {
-    color: white;
-    background-color: #609966;
+interface SidebarProps {
+    firstName: string,
+    lastName: string,
+    avatar: string,
 }
-`
-function Sidebar() {
+
+function Sidebar({ firstName, lastName, avatar }: SidebarProps) {
+    // replace with fetched user
+    const userList = ['/login', '/login']
 
     return (
         <Container>
-            <Header>Messenger</Header>
-            <NavItem to='/'>Chat</NavItem>
-            <NavItem to='/'>Profile</NavItem>
-            <NavItem to='/'>Logout</NavItem>
+
+            <UserBox 
+                id={userList[0]}
+                firstName={firstName}
+                lastName={lastName}
+                avatar={avatar}
+            />
+
+            <UserBox
+                id={userList[1]}
+                firstName={firstName}
+                lastName={lastName}
+                avatar={avatar}
+            />
+
+
         </Container>
     )
 }
