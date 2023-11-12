@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from './Input';
+import AvatarSelect from './AvatarSelect';
 import Button from './Button';
 import styled from 'styled-components';
 
@@ -50,7 +51,10 @@ function SignupForm() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
+    const [avatar, setAvatar] = useState("");
     const [error, setError] = useState("");
+
+    console.log(avatar);
 
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -74,6 +78,7 @@ function SignupForm() {
                     last_name: lastName,
                     password: password,
                     confirm_password: confirmPass,
+                    avatar: avatar,
                 }),
             });
 
@@ -132,7 +137,12 @@ function SignupForm() {
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setConfirmPass(e.target.value)}
                 />
                 
-                {/* Avatar dropdown component goes here */}
+                <AvatarSelect
+                    value={avatar}
+                    label='Select Avatar'
+                    id='avatar'
+                    onChange={(e: ChangeEvent<HTMLSelectElement>) => setAvatar(e.target.value)}
+                />
 
                 {error && <ErrorMessage>{error}</ErrorMessage>}
   

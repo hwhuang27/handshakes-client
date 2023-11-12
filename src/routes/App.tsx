@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle} from 'styled-components';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import ChatWindow from '../components/ChatWindow';
+import ContentWindow from '../components/ContentWindow';
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -55,7 +55,7 @@ function App() {
                     avatar={avatar}
                 />
 
-                <ChatWindow />
+                <ContentWindow />
 
             </ContentWrapper>
         </PageWrapper>

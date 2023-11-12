@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-    background-color: black;
-    height: calc(100vh - 82px);
+    background-color: white;
 `
 
-
-function ChatWindow(){
+function ContentWindow(){
 
     return(
         <Container>
-            
+
         </Container>
     )
 }
 
-export default ChatWindow;
+export default ContentWindow;

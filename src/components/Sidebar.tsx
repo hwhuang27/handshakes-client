@@ -9,6 +9,8 @@ const Container = styled.div`
     margin: 0;
     display: flex;
     flex-direction: column;
+    height: calc(100vh - 82px);
+    overflow: auto;
 `
 
 interface SidebarProps {
