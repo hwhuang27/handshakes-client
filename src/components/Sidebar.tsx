@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserBox from './UserBox'
 
 const Container = styled.div`
-    min-height: 100vh;
+    flex: 1;
     border-right: 2px solid #9DC08B;
     padding: 0;
     margin: 0;

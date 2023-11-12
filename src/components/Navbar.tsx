@@ -32,16 +32,18 @@ const StyledLink = styled(Link)`
     font-size: 22px;
     font-weight: bold;
     font-style: italic;
-
-    color: black;
-    padding: 8px 24px;
+    background-color: #9DC08B;
+    color: white;
+    padding: 6px 20px;
     margin: 0;
+    border: 4px solid white;
     border-radius: 36px;
 
     transition: all .1s ease-in-out;
     &:hover {
-        background-color: #9DC08B;
-        color: white;
+        color: black;
+        background-color: white;
+        border: 4px solid #9DC08B;
     }
 `
 const NavHeader = styled.p`

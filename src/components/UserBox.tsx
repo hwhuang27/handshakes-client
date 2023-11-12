@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Container = styled(Link)`
     display: flex; 
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     border-bottom: 2px solid #9DC08B;
     
@@ -15,16 +14,16 @@ const Container = styled(Link)`
     }
 `
 const Avatar = styled.img`
-    margin-left: 24px;
+    margin-left: 1rem;
 `
 
 const UserName = styled.p`
     flex: 1;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
+    text-align: left;
     color: black;
-    padding: 8px 16px;
-    margin: 12px 16px 12px 0;
+    padding: 22px 16px;
 `
 
 interface UserBoxProps {
