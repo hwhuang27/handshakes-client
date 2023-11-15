@@ -11,6 +11,7 @@ const Container = styled.div`
     flex-direction: column;
     height: calc(100vh - 82px);
     overflow: auto;
+    background-color: #EDF1D6;
 `
 
 interface SidebarProps {

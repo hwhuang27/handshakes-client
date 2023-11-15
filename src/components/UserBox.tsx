@@ -6,6 +6,8 @@ const Container = styled(Link)`
     flex-direction: row;
     align-items: center;
     border-bottom: 2px solid #9DC08B;
+    background-color: white;
+
     
     transition: all .1s ease-in;
     &:hover{

@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 }
 `
 const Container = styled.nav`
-    background-color: white;
+    background-color: #EDF1D6;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -36,7 +36,7 @@ const StyledLink = styled(Link)`
     color: white;
     padding: 6px 20px;
     margin: 0;
-    border: 4px solid white;
+    border: 4px solid #EDF1D6;
     border-radius: 36px;
 
     transition: all .1s ease-in-out;
