@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Input from './Input';
+import FormInput from './FormInput';
 import AvatarSelect from './AvatarSelect';
-import Button from './Button';
+import FormButton from './FormButton';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -106,31 +106,31 @@ function SignupForm() {
             </HeaderWrapper>
 
             <FormContentWrapper>
-                <Input
+                <FormInput
                     label='Email'
                     type='email'
                     id='email'
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
-                <Input
+                <FormInput
                     label='First Name'
                     type='text'
                     id='firstName'
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}
                 />
-                <Input
+                <FormInput
                     label='Last Name'
                     type='text'
                     id='lastName'
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}
                 />
-                <Input
+                <FormInput
                     label='Password'
                     type='password'
                     id='password'
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 />
-                <Input
+                <FormInput
                     label='Confirm Password'
                     type='password'
                     id='confirmPassword'
@@ -146,7 +146,7 @@ function SignupForm() {
 
                 {error && <ErrorMessage>{error}</ErrorMessage>}
   
-                <Button type='submit' text='Sign Up' />
+                <FormButton type='submit' text='Sign Up' />
 
                 <div>
                     <LoginText>Already have an account?</LoginText>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 const StyledButton = styled.button`
   margin: 4px 0 12px;
   background-color: #9DC08B;
@@ -28,7 +27,7 @@ interface ButtonProps {
     text: string,
 }
 
-function Button({type, text} : ButtonProps) {
+function FormButton({type, text} : ButtonProps) {
 
     return (
         <StyledButton type={type}>
@@ -37,4 +36,4 @@ function Button({type, text} : ButtonProps) {
     )
 }
 
-export default Button;
+export default FormButton;

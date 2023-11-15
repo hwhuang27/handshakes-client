@@ -35,7 +35,7 @@ const StyledInput = styled.input`
 }
 `
 
-function Input({label, type, id, onChange} : InputProps)
+function FormInput({label, type, id, onChange} : InputProps)
 {
     return(
       <Wrapper>
@@ -49,4 +49,4 @@ function Input({label, type, id, onChange} : InputProps)
     )
 }
 
-export default Input;
+export default FormInput;

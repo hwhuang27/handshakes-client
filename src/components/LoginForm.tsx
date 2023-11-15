@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Input from './Input';
-import Button from './Button';
+import FormInput from './FormInput';
+import FormButton from './FormButton';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -119,13 +119,13 @@ function LoginForm() {
             </HeaderWrapper>
             
             <FormContentWrapper>
-                <Input
+                <FormInput
                     label='Email'
                     type='email'
                     id='email'
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 />
-                <Input
+                <FormInput
                     label='Password'
                     type='password'
                     id='password'
@@ -138,7 +138,7 @@ function LoginForm() {
 
                 {error && <ErrorMessage>{error}</ErrorMessage>}
 
-                <Button type='submit' text='Login' />
+                <FormButton type='submit' text='Login' />
 
                 <div>
                     <SignupText>Don't have an account?</SignupText>
@@ -146,7 +146,7 @@ function LoginForm() {
                 </div>
 
                 <LineBreak><LineBreakSpan>Alternatively</LineBreakSpan></LineBreak>
-                <Button type='button' text='Try Demo User' />
+                <FormButton type='button' text='Try Demo User' />
 
             </FormContentWrapper>
         </StyledForm>

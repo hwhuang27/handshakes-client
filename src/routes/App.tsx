@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle} from 'styled-components';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import ContentWindow from '../components/ContentWindow';
+import Chatbox from '../components/Chatbox';
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -32,7 +32,7 @@ const PageWrapper = styled.div`
 `
 const ContentWrapper = styled.div`
     display: grid;
-    grid-template-columns: minmax(300px, 1fr) 6fr;
+    grid-template-columns: minmax(280px, 1fr) 6fr;
 `
 
 function App() {
@@ -54,9 +54,7 @@ function App() {
                     lastName={lastName}
                     avatar={avatar}
                 />
-
-                <ContentWindow />
-
+                <Chatbox/>
             </ContentWrapper>
         </PageWrapper>
     )
