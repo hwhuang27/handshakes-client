@@ -3,36 +3,41 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex; 
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     border-bottom: 2px solid #9DC08B;
     background-color: white;
     
     transition: all .1s ease-in;
-    &:hover{
-        background-color: #D3E4CD;
-        border-left: 6px solid #609966;
-    }
+
 `
 const UserName = styled.p`
     flex: 1;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    text-align: left;
-    color: black;
-    padding: 22px 16px;
+    // text-align: left;
+    padding: 12px 24px 0px;
+`
+
+const Message = styled.p`
+    flex: 1;
+    font-size: 18px;
+    // text-align: left;
+    padding: 4px 24px 4px;
 `
 
 interface UserMessageProps {
     firstName: string,
     lastName: string,
+    message: string,
 }
 
-function UserMessage({ firstName, lastName }: UserMessageProps) {
+function UserMessage({ firstName, lastName, message}: UserMessageProps) {
 
     return (
         <Container>
             <UserName>{firstName} {lastName}</UserName>
+            <Message>{message}</Message>
         </Container>
     )
 }
