@@ -10,10 +10,15 @@ const GlobalStyle = createGlobalStyle`
     list-style-type: none;
 }
 
+#root{
+    flex: 1;
+}
+
 body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    min-width: 100%;
 
     color: #40513B;
     background-color: #8EC3B0;
@@ -32,16 +37,17 @@ const PageWrapper = styled.div`
 `
 const ContentWrapper = styled.div`
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) 6fr;
+    grid-template-columns: minmax(310px, 1fr) 5fr;
 `
 
 function App() {
-    const firstName = `David`;
-    const lastName = `Huang`;
-    const avatar = `panda`;
+    const firstName = localStorage.getItem('firstName') || "";
+    const lastName = localStorage.getItem('lastName') || "";
+    const avatar = localStorage.getItem('avatar') || "";
 
     return (
         <PageWrapper>
+            
             <GlobalStyle />
             <Navbar 
                 firstName={firstName} 

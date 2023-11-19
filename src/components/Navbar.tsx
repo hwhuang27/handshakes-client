@@ -80,13 +80,28 @@ interface NavProps {
 function NavBar({firstName, lastName, avatar}: NavProps) {
     const imagePath = `src/assets/${avatar}.png`
     
+    let logout = async () => {
+        try {
+            const response = await fetch(`https://messenger-api-production.up.railway.app/auth/logout`,
+            {
+                method: "POST",
+            });
+            if(!response.ok) throw new Error(`Error: Server error (logout)`);
+            
+            localStorage.clear();
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Container>
             <GlobalStyle />
 
             <LeftGroup>
-                <StyledLink to='/'>Chat</StyledLink>
-                <StyledLink to='/'>Profile</StyledLink>
+                <StyledLink to='/chat'>Chat</StyledLink>
+                <StyledLink to='/profile'>Profile</StyledLink>
             </LeftGroup>
 
             <NavHeader>Messenger</NavHeader>
@@ -94,7 +109,7 @@ function NavBar({firstName, lastName, avatar}: NavProps) {
             <RightGroup>
                 <Avatar src={imagePath} alt='avatar'/>
                 <NavName>{firstName} {lastName}</NavName>
-                <StyledLink to='/login'>Logout</StyledLink>
+                <StyledLink to='/login' onClick={logout}>Logout</StyledLink>
             </RightGroup>
 
         </Container>

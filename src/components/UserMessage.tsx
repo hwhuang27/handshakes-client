@@ -16,14 +16,14 @@ const UserName = styled.p`
     font-size: 18px;
     font-weight: bold;
     // text-align: left;
-    padding: 12px 24px 0px;
+    padding: 8px 0px 0px 48px;
 `
 
 const Message = styled.p`
     flex: 1;
     font-size: 18px;
     // text-align: left;
-    padding: 4px 24px 4px;
+    padding: 4px 24px 8px 48px;
 `
 
 interface UserMessageProps {

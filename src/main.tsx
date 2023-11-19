@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Index from './routes/Index.tsx';
 import App from './routes/App.tsx';
+import Profile from './routes/Profile.tsx';
 import Login from './routes/Login.tsx';
 import Register from './routes/Register.tsx';
 import './index.css'
@@ -9,7 +11,7 @@ import './index.css'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <Index />
   },
   {
     path: '/login',
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />
   },
+  {
+    path: '/chat',
+    element: <App />
+  },
+  {
+    path: '/profile',
+    element: <Profile />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

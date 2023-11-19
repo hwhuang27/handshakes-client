@@ -51,7 +51,7 @@ function SignupForm() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
-    const [avatar, setAvatar] = useState("");
+    const [avatar, setAvatar] = useState("panda");
     const [error, setError] = useState("");
 
     console.log(avatar);

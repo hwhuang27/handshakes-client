@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import FormInput from './FormInput';
 import FormButton from './FormButton';
 import styled from 'styled-components';
@@ -74,6 +75,38 @@ const ErrorMessage = styled.p`
     color: #ef4444;
     margin: 0 0 4px;
 `
+const DemoButton = styled.button`
+  margin: 4px 0 12px;
+  background-color: #9DC08B;
+  border: 3px solid #9DC08B;
+  border-radius: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 6px 20px;
+  transition: all .15s ease-in-out;
+
+  &:hover {
+  background-color: white;
+  color: #9DC08B;
+  border: 3px solid #9DC08B;
+  }
+
+  &:focus {
+  border: 3px solid #9DC08B;
+  outline: none;
+  }
+`
+interface jwtDecoded {
+    _id: string,
+    email: string,
+    first_name: string,
+    last_name: string,
+    avatar: string,
+    iat: number,
+    exp: number,
+}
+
 function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -100,13 +133,52 @@ function LoginForm() {
             
             if(res.status === 200){
                 const result = await res.json();
+                const decoded: jwtDecoded = jwtDecode(result.accessToken);
+                localStorage.setItem('id', decoded._id);
+                localStorage.setItem('email', decoded.email);
+                localStorage.setItem('firstName', decoded.first_name);
+                localStorage.setItem('lastName', decoded.last_name);
+                localStorage.setItem('avatar', decoded.avatar);
+                localStorage.setItem('token', result.accessToken);
                 setError("");
-                localStorage.setItem("token", result.token);
-                navigate('/');
+                navigate('/chat');
             } else{
                 setError('Invalid username or password');
             }
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleDemo = async (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        try {
+            const res = await fetch(`https://messenger-api-production.up.railway.app/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: `demouser@demo.com`,
+                    password: `demouser`,
+                }),
+            });
+
+            if (res.status === 200) {
+                const result = await res.json();
+                const decoded: jwtDecoded = jwtDecode(result.accessToken);
+                localStorage.setItem('id', decoded._id);
+                localStorage.setItem('email', decoded.email);
+                localStorage.setItem('firstName', decoded.first_name);
+                localStorage.setItem('lastName', decoded.last_name);
+                localStorage.setItem('avatar', decoded.avatar);
+                localStorage.setItem('token', result.accessToken);
+                setError("");
+                navigate('/chat');
+            } else {
+                setError('Invalid username or password');
+            }
         } catch (error) {
             console.log(error);
         }
@@ -146,7 +218,7 @@ function LoginForm() {
                 </div>
 
                 <LineBreak><LineBreakSpan>Alternatively</LineBreakSpan></LineBreak>
-                <FormButton type='button' text='Try Demo User' />
+                <DemoButton type='button' onClick={handleDemo}>Demo User</DemoButton>
 
             </FormContentWrapper>
         </StyledForm>
