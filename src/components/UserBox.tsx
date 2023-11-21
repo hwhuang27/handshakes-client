@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled(Link)`
+const Container = styled.div`
     display: flex; 
     flex-direction: row;
     align-items: center;
@@ -15,6 +14,15 @@ const Container = styled(Link)`
         border-left: 6px solid #609966;
     }
 `
+const ActiveContainer = styled.div`
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid #9DC08B;
+    background-color: #D3E4CD;
+    border-left: 6px solid #609966;
+`
+
 const Avatar = styled.img`
     margin-left: 1rem;
 `
@@ -24,7 +32,7 @@ const UserName = styled.p`
     font-size: 20px;
     font-weight: bold;
     text-align: left;
-    color: black;
+    color: #40513B;
     padding: 22px 16px;
 `
 
@@ -33,17 +41,27 @@ interface UserBoxProps {
     firstName: string,
     lastName: string,
     avatar: string,
+    activeUser: string,
+    onClick: any,
 }
 
-function UserBox({id, firstName, lastName, avatar} : UserBoxProps){
-    // const idPath = `/chat/${id}`
+function UserBox({id, firstName, lastName, avatar, activeUser, onClick} : UserBoxProps){
     const imagePath = `src/assets/${avatar}.png`;
 
-    return (
-        <Container to={id}>
-            <Avatar src={imagePath} alt='avatar' />
-            <UserName>{firstName} {lastName}</UserName>
-        </Container>   
-    )
+    if(id === activeUser){
+        return(
+            <ActiveContainer onClick={() => onClick('none')}>
+                <Avatar src={imagePath} alt='avatar' />
+                <UserName>{firstName} {lastName}</UserName>
+            </ActiveContainer>
+        )
+    } else {
+        return(
+            <Container onClick={() => onClick(id)}>
+                <Avatar src={imagePath} alt='avatar' />
+                <UserName>{firstName} {lastName}</UserName>
+            </Container>
+        )
+    }
 }
 export default UserBox;

@@ -22,9 +22,9 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: '/chat',
+    path: '/chat/',
     element: <App />
-  },
+  }, 
   {
     path: '/profile',
     element: <Profile />

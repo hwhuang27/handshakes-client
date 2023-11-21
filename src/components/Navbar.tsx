@@ -65,7 +65,7 @@ const RightGroup = styled.div`
 const NavName = styled.p`
     font-size: 22px;
     font-weight: bold;
-    color: black;
+    color: #40513B;
     padding: 8px 16px;
     margin: 12px 16px 12px 0;
 `

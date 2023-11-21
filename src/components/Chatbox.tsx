@@ -65,7 +65,11 @@ const StyledSubmit = styled.button`
     }
 `
 
-function Chatbox(){
+interface ChatBoxProps {
+    activeUser: string,
+}
+
+function Chatbox({ activeUser } : ChatBoxProps){
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -73,8 +77,6 @@ function Chatbox(){
         // send socket io emit here
     }
 
-
-    
     return(
         <Container>
             <ChatWindow>

@@ -15,32 +15,41 @@ const Container = styled.div`
 `
 
 interface SidebarProps {
-    firstName: string,
-    lastName: string,
-    avatar: string,
+    userList: Object,
+    activeUser: string,
+    onClick: any,
 }
 
-function Sidebar({ firstName, lastName, avatar }: SidebarProps) {
-    // replace with fetched user
-    const userList = ['/login', '/login']
+function Sidebar({ userList, activeUser, onClick }: SidebarProps) {
+    const users = [];
+    for(const user of Object.values(userList)){
+        users.push(user)
+    };
 
     return (
         <Container>
-
-            <UserBox 
+            {
+                Object.values(userList).map((user) => {
+                    return(
+                        <UserBox
+                            key={user._id}
+                            id={user._id}
+                            firstName={user.first_name}
+                            lastName={user.last_name}
+                            avatar={user.avatar}
+                            activeUser={activeUser}
+                            onClick={onClick}
+                        ></UserBox>
+                    );
+                })
+            }
+        
+            {/* <UserBox 
                 id={userList[0]}
                 firstName={firstName}
                 lastName={lastName}
                 avatar={avatar}
-            />
-
-            <UserBox
-                id={userList[1]}
-                firstName={firstName}
-                lastName={lastName}
-                avatar={avatar}
-            />
-
+            /> */}
 
         </Container>
     )
