@@ -1,6 +1,8 @@
 import { useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import UserMessage from './UserMessage';
+import { io } from 'socket.io-client';
+
 
 const Container = styled.div`
     background-color: white;
@@ -75,6 +77,10 @@ function Chatbox({ activeUser } : ChatBoxProps){
     const [lastName, setLastName] = useState("");
     
     const currentUser = localStorage.getItem('id');
+    
+    const socket = io(
+        `https://messenger-api-production.up.railway.app/?token=${localStorage.getItem('token')}`
+    );
 
     useEffect(() => {
         async function fetchChat(){
@@ -126,15 +132,19 @@ function Chatbox({ activeUser } : ChatBoxProps){
         if(activeUser !== 'none'){
             fetchChat();
             fetchName();
+            
         }
     }, [activeUser]);
+    
 
+    
+    
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         // send socket io emit here
     }
-
+    
     return(
         <Container>
             <ChatWindow>
@@ -143,10 +153,10 @@ function Chatbox({ activeUser } : ChatBoxProps){
                         if(msg.fromUser === currentUser){
                             return (
                                 <UserMessage
-                                    key={msg._id}
-                                    firstName='You'
-                                    lastName=''
-                                    message={msg.message}
+                                key={msg._id}
+                                firstName='You'
+                                lastName=''
+                                message={msg.message}
                                 />
                             )
                         }

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import styled, { createGlobalStyle} from 'styled-components';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
