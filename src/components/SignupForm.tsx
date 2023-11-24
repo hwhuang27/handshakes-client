@@ -54,8 +54,6 @@ function SignupForm() {
     const [avatar, setAvatar] = useState("panda");
     const [error, setError] = useState("");
 
-    console.log(avatar);
-
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

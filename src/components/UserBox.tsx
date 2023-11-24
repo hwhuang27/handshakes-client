@@ -6,7 +6,6 @@ const Container = styled.div`
     align-items: center;
     border-bottom: 2px solid #9DC08B;
     background-color: white;
-
     
     transition: all .1s ease-in;
     &:hover{
@@ -21,6 +20,7 @@ const ActiveContainer = styled.div`
     border-bottom: 2px solid #9DC08B;
     background-color: #D3E4CD;
     border-left: 6px solid #609966;
+    transition: all .1s ease-in;
 `
 
 const Avatar = styled.img`
@@ -50,7 +50,7 @@ function UserBox({id, firstName, lastName, avatar, activeUser, onClick} : UserBo
 
     if(id === activeUser){
         return(
-            <ActiveContainer onClick={() => onClick('none')}>
+            <ActiveContainer>
                 <Avatar src={imagePath} alt='avatar' />
                 <UserName>{firstName} {lastName}</UserName>
             </ActiveContainer>

@@ -30,8 +30,7 @@ function AvatarSelect({value, label, id, onChange} : AvatarProps){
                 value={value} 
                 name='avatar' 
                 id={id} 
-                onChange={onChange} 
-                defaultValue='panda'
+                onChange={onChange}
             >
                 <option value="panda">Panda</option>
                 <option value="snail">Snail</option>

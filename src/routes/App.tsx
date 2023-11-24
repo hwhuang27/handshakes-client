@@ -4,6 +4,7 @@ import styled, { createGlobalStyle} from 'styled-components';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Chatbox from '../components/Chatbox';
+import { useNavigate } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -50,60 +51,39 @@ function App() {
     const lastName = localStorage.getItem('lastName') ?? "";
     const avatar = localStorage.getItem('avatar') ?? "";
 
+    let navigate = useNavigate();
     useEffect(() => {
-        async function checkToken(){
-            try {
-                const token = localStorage.getItem('token')!;
-                const decoded = jwtDecode(token);
-
-                // if access token is expired, use refresh token to get new access token
-                if (decoded?.exp && Date.now() >= decoded.exp * 1000) {
-                    const response = await fetch(
-                        `https://messenger-api-production.up.railway.app/auth/refresh`
-                    );
-                    if (!response.ok) {
-                        throw new Error(`HTTP Error: Status ${response.status}`);
-                    }
-                    let data = await response.json();
-                    localStorage.setItem('token', data.accessToken);
-                }
-            } catch (error) {
-                console.log(error);
-                console.log(`Error while checking token expiry.`);
-            }
-        }
-
         async function getUsers(){
             try {
                 const response = await fetch(
                     `https://messenger-api-production.up.railway.app/api/users`,
                 {
+                    method: "GET",
                     headers: {
                         "Authorization": `bearer ${localStorage.getItem('token')}`,
                     },
                 });
-                
-                if(!response.ok){
-                    throw new Error(`HTTP Error: Status ${response.status}`);
+                if(response.status === 401){
+                    navigate('/');
+                } else if (!response.ok){
+                    console.log(`Error while fetching users.`)
+                    throw new Error(`Status ${response.status}`);
+                } else {
+                    let data = await response.json();
+                    setUserList(data.users);
                 }
-                let data = await response.json();
-                setUserList(data.users);
 
             } catch (error) {
                 console.log(error);
-                console.log(`Error while fetching users.`)
             }
         };
 
-        checkToken();
         getUsers();
     }, [])
 
     const changeUser = (id: string) => {
         setActiveUser(id);
-    }
-
-    console.log(activeUser);
+    }   
 
     return (
         <PageWrapper>

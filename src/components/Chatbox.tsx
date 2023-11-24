@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import UserMessage from './UserMessage';
 
@@ -64,12 +64,70 @@ const StyledSubmit = styled.button`
         scale: 0.95;
     }
 `
-
 interface ChatBoxProps {
     activeUser: string,
 }
 
 function Chatbox({ activeUser } : ChatBoxProps){
+    const [roomId, setRoomId] = useState("");
+    const [messages, setMessages] = useState({});
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    
+    const currentUser = localStorage.getItem('id');
+
+    useEffect(() => {
+        async function fetchChat(){
+            try {
+                const response = await fetch(
+                    `https://messenger-api-production.up.railway.app/api/chat/${activeUser}`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `bearer ${localStorage.getItem('token')}`,
+                        }
+                    });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch chat.`)
+                }
+                let data = await response.json();
+                setRoomId(data.room._id);
+                setMessages(data.room.messages);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        async function fetchName(){
+            try {
+                const response = await fetch(
+                    `https://messenger-api-production.up.railway.app/api/user/${activeUser}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Authorization": `bearer ${localStorage.getItem('token')}`,
+                        }
+                    });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch target user.`)
+                }
+                let data = await response.json();
+                setFirstName(data.user[0].first_name);
+                setLastName(data.user[0].last_name);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        if(activeUser !== 'none'){
+            fetchChat();
+            fetchName();
+        }
+    }, [activeUser]);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -80,18 +138,29 @@ function Chatbox({ activeUser } : ChatBoxProps){
     return(
         <Container>
             <ChatWindow>
-                <UserMessage
-                    firstName='David'
-                    lastName='Huang'
-                    message='hey dude'
-                />                
-                <UserMessage
-                    firstName='David'
-                    lastName='Huang'
-                    message='whats up?'
-                />
+                {
+                    Object.values(messages).map((msg: any) => {
+                        if(msg.fromUser === currentUser){
+                            return (
+                                <UserMessage
+                                    key={msg._id}
+                                    firstName='You'
+                                    lastName=''
+                                    message={msg.message}
+                                />
+                            )
+                        }
+                        return(
+                            <UserMessage
+                                key={msg._id}
+                                firstName={firstName}
+                                lastName={lastName}
+                                message={msg.message}
+                            />
+                        )
+                    })
+                }
             </ChatWindow>
-
 
             <MessageBox onSubmit={handleSubmit}>
                 <StyledInput
@@ -103,6 +172,8 @@ function Chatbox({ activeUser } : ChatBoxProps){
                 ></StyledInput>
 
                 <StyledSubmit>Send</StyledSubmit>
+                
+                {/* Add a "Back" Button here to go back to welcome page */}
             </MessageBox>
         </Container>
     )
