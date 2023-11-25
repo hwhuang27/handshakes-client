@@ -1,7 +1,7 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import UserMessage from './UserMessage';
-import { io } from 'socket.io-client';
+import { Socket, io } from 'socket.io-client';
 
 
 const Container = styled.div`
@@ -71,16 +71,14 @@ interface ChatBoxProps {
 }
 
 function Chatbox({ activeUser } : ChatBoxProps){
+    const [currentSocket, setCurrentSocket] = useState<Socket | null>(null);
     const [roomId, setRoomId] = useState("");
     const [messages, setMessages] = useState({});
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [textbox, setTextbox] = useState("");
     
     const currentUser = localStorage.getItem('id');
-    
-    const socket = io(
-        `https://messenger-api-production.up.railway.app/?token=${localStorage.getItem('token')}`
-    );
 
     useEffect(() => {
         async function fetchChat(){
@@ -129,24 +127,32 @@ function Chatbox({ activeUser } : ChatBoxProps){
             }
         }
 
+        async function joinRoom(){
+            socket.emit('join room', roomId);
+        }
+
+        const socket = io(
+            `https://messenger-api-production.up.railway.app/?token=${localStorage.getItem('token')}`
+        );
+        setCurrentSocket(socket);
+
         if(activeUser !== 'none'){
             fetchChat();
             fetchName();
-            
+            joinRoom();
         }
-    }, [activeUser]);
-    
 
-    
+    }, [activeUser]);
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        // send socket io emit here
+        currentSocket!.emit('private message', textbox, roomId);
+        setTextbox("");
     }
     
     return(
         <Container>
+
             <ChatWindow>
                 {
                     Object.values(messages).map((msg: any) => {
@@ -171,20 +177,27 @@ function Chatbox({ activeUser } : ChatBoxProps){
                     })
                 }
             </ChatWindow>
+            
+            {
+                activeUser === 'none' ? <></> : 
+                <MessageBox onSubmit={handleSubmit}>
+                    <StyledInput
+                        type='text'
+                        id='messagebox'
+                        placeholder='Type your message here..'
+                        maxLength={300}
+                        autoComplete='off'
+                        spellCheck="false"
+                        value={textbox}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setTextbox(e.target.value)}
+                    ></StyledInput>
 
-            <MessageBox onSubmit={handleSubmit}>
-                <StyledInput
-                    type='text'
-                    id='messagebox'
-                    placeholder='Type your message here..'
-                    maxLength={300}
-                    autoComplete='off'
-                ></StyledInput>
+                    <StyledSubmit>Send</StyledSubmit>
 
-                <StyledSubmit>Send</StyledSubmit>
-                
-                {/* Add a "Back" Button here to go back to welcome page */}
-            </MessageBox>
+                    {/* Add a "Back" Button here to go back to welcome page */}
+                </MessageBox>
+            }
+
         </Container>
     )
 }
