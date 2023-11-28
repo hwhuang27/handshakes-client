@@ -117,11 +117,12 @@ function Chatbox({ activeUser } : ChatBoxProps){
                 }
                 let data = await response.json();
 
-                setRoomId(data.room_id);
+                setRoomId(data.room._id);
+                
                 currentSocket!.emit('join room', data.room._id);
 
                 setRoomData(data.room.messages);
-                console.log(data.room.messages);
+
 
             } catch (error) {
                 console.log(error);
@@ -189,22 +190,16 @@ function Chatbox({ activeUser } : ChatBoxProps){
         return <BottomScrollDiv ref={chatRef} />;
     }
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSendMessage = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         if(currentSocket){
-            console.log(`emitting private message`);
+            // console.log(`roomId: ${roomId}`);
             currentSocket.emit('private message', textbox, roomId);
             setNewData((newData) => [...newData, {
                 message: textbox,
                 first_name: "You",
                 last_name: "" 
             }]);
-
-            // currentSocket.emit('display message', {
-            //     message: textbox,
-            //     fromName: `You `
-            // });
         }
         setTextbox("");
     }
@@ -254,7 +249,7 @@ function Chatbox({ activeUser } : ChatBoxProps){
             </ChatWindow>
             {
                 activeUser === 'none' ? <></> : 
-                <MessageBox onSubmit={handleSubmit}>
+                <MessageBox onSubmit={handleSendMessage}>
                     <StyledInput
                         type='text'
                         id='messagebox'
