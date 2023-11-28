@@ -117,11 +117,11 @@ function Chatbox({ activeUser } : ChatBoxProps){
                 }
                 let data = await response.json();
 
-                setRoomId(data.room._id);
-                
-                currentSocket!.emit('join room', data.room._id);
-
-                setRoomData(data.room.messages);
+                if(data.room._id){
+                    setRoomId(data.room._id);
+                    currentSocket!.emit('join room', data.room._id);
+                    setRoomData(data.room.messages);
+                }
 
 
             } catch (error) {
@@ -153,8 +153,8 @@ function Chatbox({ activeUser } : ChatBoxProps){
         }
 
         if(activeUser !== 'none'){
-            fetchChat();
             setNewData([]);
+            fetchChat();
         }
 
         if(currentSocket){

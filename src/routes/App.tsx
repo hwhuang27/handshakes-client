@@ -92,6 +92,7 @@ function App() {
                 lastName={lastName}
                 avatar={avatar}
             />
+
             <ContentWrapper>
                 <Sidebar
                     userList={userList}
@@ -102,6 +103,8 @@ function App() {
                     activeUser={activeUser}
                 />
             </ContentWrapper>
+
+
         </PageWrapper>
     )
 }
