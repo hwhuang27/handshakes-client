@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import UserMessage from './UserMessage';
 import { Socket, io } from 'socket.io-client';
+import { v4 as uuidv4 } from 'uuid';
 
 const Container = styled.div`
     background-color: white;
@@ -66,43 +67,38 @@ const StyledSubmit = styled.button`
         scale: 0.95;
     }
 `
+const BottomScrollDiv = styled.div`
+    height: 0;
+    width: 0;
+`
 
 interface ChatBoxProps {
     activeUser: string,
+}
+
+interface INewMessage {
+    message: string,
+    fromName: string,
 }
 
 function Chatbox({ activeUser } : ChatBoxProps){
     const [currentSocket, setCurrentSocket] = useState<Socket | null>(null);
     const [roomId, setRoomId] = useState("");
     const [roomData, setRoomData] = useState({});
+
+    const [newData, setNewData] = useState<Object[]>([]);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [textbox, setTextbox] = useState("");
 
     const currentUser = localStorage.getItem('id');
-    
-    const ScrollToBottom = () => {
-        const chatRef = useRef<HTMLDivElement | null>(null);
-        useEffect(() => chatRef.current?.scrollIntoView());
-        // chatRef.current?.scrollIntoView({ block: "end", behavior: "smooth"})
-        return <div ref={chatRef} />;
-    }
-
 
     useEffect(() => {
-        async function createSocket(){
+        if (currentSocket === null) {
             const socket = io(
                 `https://messenger-api-production.up.railway.app/?token=${localStorage.getItem('token')}`
             );
             setCurrentSocket(socket);
-            socket.on('display message', (data) => {
-
-
-                // push to newMessages state
-                // console.log(data.message);
-                // console.log(data.fromId);
-                // console.log(data.fromName);
-            });
         }
 
         async function fetchChat(){
@@ -120,15 +116,18 @@ function Chatbox({ activeUser } : ChatBoxProps){
                     throw new Error(`Failed to fetch chat.`)
                 }
                 let data = await response.json();
-                setRoomId(data.room._id);
+
+                setRoomId(data.room_id);
+                currentSocket!.emit('join room', data.room._id);
+
                 setRoomData(data.room.messages);
+                console.log(data.room.messages);
 
             } catch (error) {
                 console.log(error);
             }
-        }
 
-        async function fetchName(){
+            // update target first/last name
             try {
                 const response = await fetch(
                     `https://messenger-api-production.up.railway.app/api/user/${activeUser}`,
@@ -149,35 +148,72 @@ function Chatbox({ activeUser } : ChatBoxProps){
             } catch (error) {
                 console.log(error);
             }
+            
         }
 
-        function joinRoom(){
-            currentSocket!.emit('join room', roomId);
-        }
-
-        if (currentSocket === null) {
-            createSocket();
-        }
         if(activeUser !== 'none'){
             fetchChat();
-            fetchName();
-            joinRoom();
+            setNewData([]);
+        }
+
+        if(currentSocket){
+            const newMessageHandler = (data: INewMessage) => {
+                const name = data.fromName.split(' ');
+
+                console.log({
+                    message: data.message,
+                    first_name: name[0],
+                    last_name: name[1],
+                })
+
+                setNewData((newData) => [...newData, {
+                    message: data.message,
+                    first_name: name[0],
+                    last_name: name[1]
+                }]);
+            }
+            currentSocket.on('display message', newMessageHandler);
+        }
+
+        return () => {
+            if(currentSocket){
+                currentSocket.off('display message');
+            }
         }
 
     }, [activeUser]);
     
+    const ScrollToBottom = () => {
+        const chatRef = useRef<HTMLDivElement | null>(null);
+        useEffect(() => chatRef.current?.scrollIntoView({ block: "end" }));
+        return <BottomScrollDiv ref={chatRef} />;
+    }
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        currentSocket!.emit('private message', textbox, roomId);
+
+        if(currentSocket){
+            console.log(`emitting private message`);
+            currentSocket.emit('private message', textbox, roomId);
+            setNewData((newData) => [...newData, {
+                message: textbox,
+                first_name: "You",
+                last_name: "" 
+            }]);
+
+            // currentSocket.emit('display message', {
+            //     message: textbox,
+            //     fromName: `You `
+            // });
+        }
         setTextbox("");
     }
 
-    
     return(
         <Container>
-
             <ChatWindow>
                 {
+                    // Load chat from database
                     Object.values(roomData).map((msg: any) => {
                         if(msg.fromUser === currentUser){
                             return (
@@ -198,14 +234,24 @@ function Chatbox({ activeUser } : ChatBoxProps){
                             />
                         )
                     })
-
                 }
-                <ScrollToBottom />
 
+                {
+                    // Load new chat messages
+                    newData.map((msg: any) => {
+                        return(
+                            <UserMessage
+                                key={uuidv4()}
+                                firstName={msg.first_name}
+                                lastName={msg.last_name}
+                                message={msg.message}
+                            />
+                        )
+                    })
+                }
+
+                <ScrollToBottom />
             </ChatWindow>
-            
-            
-            
             {
                 activeUser === 'none' ? <></> : 
                 <MessageBox onSubmit={handleSubmit}>
