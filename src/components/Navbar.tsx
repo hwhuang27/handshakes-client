@@ -78,7 +78,7 @@ interface NavProps {
 }
 
 function NavBar({firstName, lastName, avatar}: NavProps) {
-    const imagePath = `src/assets/${avatar}.png`
+    const imagePath = `public/avatars/${avatar}.png`
     
     const logout = async () => {
         try {

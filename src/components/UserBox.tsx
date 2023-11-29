@@ -46,7 +46,7 @@ interface UserBoxProps {
 }
 
 function UserBox({id, firstName, lastName, avatar, activeUser, onClick} : UserBoxProps){
-    const imagePath = `src/assets/${avatar}.png`;
+    const imagePath = `public/avatars/${avatar}.png`;
 
     if(id === activeUser){
         return(
