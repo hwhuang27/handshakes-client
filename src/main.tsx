@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     path: '/profile',
     element: <Profile />
   }
-]);
+], { basename: '/messenger-client/' });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

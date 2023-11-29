@@ -15,7 +15,7 @@ const Container = styled.div`
 `
 
 interface SidebarProps {
-    userList: Object,
+    userList: object,
     activeUser: string,
     onClick: any,
 }
@@ -24,7 +24,7 @@ function Sidebar({ userList, activeUser, onClick }: SidebarProps) {
     const users = [];
     for(const user of Object.values(userList)){
         users.push(user)
-    };
+    }
 
     return (
         <Container>

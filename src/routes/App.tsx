@@ -50,7 +50,7 @@ function App() {
     const lastName = localStorage.getItem('lastName') ?? "";
     const avatar = localStorage.getItem('avatar') ?? "";
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     useEffect(() => {
         async function getUsers(){
             try {
@@ -68,14 +68,14 @@ function App() {
                     console.log(`Error while fetching users.`)
                     throw new Error(`Status ${response.status}`);
                 } else {
-                    let data = await response.json();
+                    const data = await response.json();
                     setUserList(data.users);
                 }
 
             } catch (error) {
                 console.log(error);
             }
-        };
+        }
 
         getUsers();
     }, [])

@@ -80,7 +80,7 @@ interface NavProps {
 function NavBar({firstName, lastName, avatar}: NavProps) {
     const imagePath = `src/assets/${avatar}.png`
     
-    let logout = async () => {
+    const logout = async () => {
         try {
             const response = await fetch(`https://messenger-api-production.up.railway.app/auth/logout`,
             {

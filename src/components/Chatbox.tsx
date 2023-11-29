@@ -86,7 +86,7 @@ function Chatbox({ activeUser } : ChatBoxProps){
     const [roomId, setRoomId] = useState("");
     const [roomData, setRoomData] = useState({});
 
-    const [newData, setNewData] = useState<Object[]>([]);
+    const [newData, setNewData] = useState<object[]>([]);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [textbox, setTextbox] = useState("");
@@ -115,7 +115,7 @@ function Chatbox({ activeUser } : ChatBoxProps){
                 if (!response.ok) {
                     throw new Error(`Failed to fetch chat.`)
                 }
-                let data = await response.json();
+                const data = await response.json();
 
                 if(data.room._id){
                     setRoomId(data.room._id);
@@ -142,7 +142,7 @@ function Chatbox({ activeUser } : ChatBoxProps){
                 if (!response.ok) {
                     throw new Error(`Failed to fetch target user.`)
                 }
-                let data = await response.json();
+                const data = await response.json();
                 setFirstName(data.user[0].first_name);
                 setLastName(data.user[0].last_name);
 
