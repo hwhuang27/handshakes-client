@@ -27,7 +27,6 @@ const LeftGroup = styled.div`
     margin-left: 36px;
     gap: 16px;
 `
-
 const StyledLink = styled(Link)`
     font-size: 22px;
     font-weight: bold;
@@ -78,7 +77,7 @@ interface NavProps {
 }
 
 function NavBar({firstName, lastName, avatar}: NavProps) {
-    const imagePath = `public/avatars/${avatar}.png`
+    const imgUrl = `/messenger-client/${avatar}.png`;
     
     const logout = async () => {
         try {
@@ -107,7 +106,7 @@ function NavBar({firstName, lastName, avatar}: NavProps) {
             <NavHeader>Messenger</NavHeader>
 
             <RightGroup>
-                <Avatar src={imagePath} alt='avatar'/>
+                <Avatar src={imgUrl} alt='avatar'/>
                 <NavName>{firstName} {lastName}</NavName>
                 <StyledLink to='/login' onClick={logout}>Logout</StyledLink>
             </RightGroup>

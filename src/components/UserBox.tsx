@@ -46,19 +46,19 @@ interface UserBoxProps {
 }
 
 function UserBox({id, firstName, lastName, avatar, activeUser, onClick} : UserBoxProps){
-    const imagePath = `public/avatars/${avatar}.png`;
+    const imgUrl = `/messenger-client/${avatar}.png`;
 
     if(id === activeUser){
         return(
             <ActiveContainer>
-                <Avatar src={imagePath} alt='avatar' />
+                <Avatar src={imgUrl} alt='avatar' />
                 <UserName>{firstName} {lastName}</UserName>
             </ActiveContainer>
         )
     } else {
         return(
             <Container onClick={() => onClick(id)}>
-                <Avatar src={imagePath} alt='avatar' />
+                <Avatar src={imgUrl} alt='avatar' />
                 <UserName>{firstName} {lastName}</UserName>
             </Container>
         )
