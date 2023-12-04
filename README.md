@@ -22,3 +22,5 @@ A real-time messaging app created with Socket.io
 ![Login](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/login.png)
 
 ![Register](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/register.png)
+
+![EditProfile](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/profile.png)
