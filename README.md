@@ -15,6 +15,8 @@ Live site: [Messenger](https://hwhuang27.github.io/messenger-client/)
 
 ## 📷 Screenshots 📷
 
-#### Login
-![Login Screen](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/login.png)
+![Chat](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/chat.png)
 
+![Login](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/login.png)
+
+![Register](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/register.png)
