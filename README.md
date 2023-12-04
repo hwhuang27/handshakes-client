@@ -2,7 +2,9 @@
 
 A real-time messaging app created with Socket.io
 
-Live site: [Messenger](https://hwhuang27.github.io/messenger-client/)
+[Live site on GitHub Pages.](https://hwhuang27.github.io/messenger-client/)
+
+[Backend API repo can be found here.](https://github.com/hwhuang27/messenger-api)
 
 ## 🛠️ Built with... 🛠️
 
