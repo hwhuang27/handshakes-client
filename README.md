@@ -1,27 +1,20 @@
-# React + TypeScript + Vite
+# 💬 Messenger 💬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time messaging app created with Socket.io
 
-Currently, two official plugins are available:
+Live site: [Messenger](https://hwhuang27.github.io/messenger-client/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Built with... 🛠️
 
-## Expanding the ESLint configuration
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://react.dev/) with [Vite](https://vitejs.dev/)
+- [NodeJS](https://nodejs.org/en) with [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/docs/)
+- [Socket.io](https://socket.io/)
+- [styled-components](https://styled-components.com/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📷 Screenshots 📷
 
-- Configure the top-level `parserOptions` property like this:
+#### Login
+![Login Screen](https://raw.githubusercontent.com/hwhuang27/bookshelf-client/main/src/assets/screenshots/login.png)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
