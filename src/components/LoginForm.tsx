@@ -193,7 +193,7 @@ function LoginForm() {
         }
     }
 
-    const logoUrl = `/messenger-client/handshake64.png`;
+    const logoUrl = `/handshakes-client/handshake64.png`;
 
     return (
         <StyledForm onSubmit={handleSubmit}>

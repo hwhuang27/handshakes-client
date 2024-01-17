@@ -24,25 +24,3 @@ function Index(){
 }
 
 export default Index;
-
-// async function checkToken() {
-//     try {
-//         const token = localStorage.getItem('token')!;
-//         const decoded = jwtDecode(token);
-
-//         // if access token is expired, use refresh token to get new access token
-//         if (decoded?.exp && Date.now() >= decoded.exp * 1000) {
-//             const response = await fetch(
-//                 `https://messenger-api-production.up.railway.app/auth/refresh`
-//             );
-//             if (!response.ok) {
-//                 console.log(`Error while checking token expiry.`);
-//                 throw new Error(`Status ${response.status}`);
-//             }
-//             let data = await response.json();
-//             localStorage.setItem('token', data.accessToken);
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }

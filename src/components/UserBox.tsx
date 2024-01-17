@@ -46,7 +46,7 @@ interface UserBoxProps {
 }
 
 function UserBox({id, firstName, lastName, avatar, activeUser, onClick} : UserBoxProps){
-    const imgUrl = `/messenger-client/${avatar}.png`;
+    const imgUrl = `/handshakes-client/${avatar}.png`;
 
     if(id === activeUser){
         return(
