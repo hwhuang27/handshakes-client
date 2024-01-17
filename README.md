@@ -6,7 +6,7 @@ A real-time messaging app created with Socket.io
 
 [Backend API repo can be found here.](https://github.com/hwhuang27/handshakes-api)
 
-## 🛠️ Features 🛠️
+## 🚀 Features 🚀
 - Real-time 2-way direct messaging system
 - Interactive and colorful UI
 - New account sign-up / login authentication
