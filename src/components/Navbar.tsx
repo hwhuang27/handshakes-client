@@ -77,7 +77,7 @@ interface NavProps {
 }
 
 function NavBar({firstName, lastName, avatar}: NavProps) {
-    const imgUrl = `/messenger-client/${avatar}.png`;
+    const imgUrl = `/handshakes-client/${avatar}.png`;
     
     const logout = async () => {
         try {
