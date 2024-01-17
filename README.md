@@ -1,4 +1,4 @@
-# 💬 Messenger 💬
+# 🤝 Handshakes 🤝
 
 A real-time messaging app created with Socket.io
 

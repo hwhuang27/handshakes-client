@@ -103,7 +103,7 @@ function NavBar({firstName, lastName, avatar}: NavProps) {
                 <StyledLink to='/profile'>Profile</StyledLink>
             </LeftGroup>
 
-            <NavHeader>Messenger</NavHeader>
+            <NavHeader>Handshakes</NavHeader>
 
             <RightGroup>
                 <Avatar src={imgUrl} alt='avatar'/>

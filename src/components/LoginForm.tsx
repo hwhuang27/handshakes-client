@@ -20,13 +20,22 @@ const HeaderText = styled.p`
     color: #739072;
     font-size: 40px;
     letter-spacing: 0.1rem;
-    margin: 8px 0 16px;
+    margin: 8px 0 0;
     transition: all .1s ease-in-out;
 
     &:hover {
     scale: 1.05;
 }
 `
+const LogoWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`
+const Logo = styled.img`
+    display: flex;
+    justify-content: center;
+`
+
 const FormContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -184,11 +193,18 @@ function LoginForm() {
         }
     }
 
+    const logoUrl = `/messenger-client/handshake64.png`;
+
     return (
         <StyledForm onSubmit={handleSubmit}>
+            <LogoWrapper>
+                <Logo src={logoUrl}></Logo>
+            </LogoWrapper>
             <HeaderWrapper>
-                <HeaderText>Messenger</HeaderText>
+                <HeaderText>Handshakes</HeaderText>
             </HeaderWrapper>
+
+
             
             <FormContentWrapper>
                 <FormInput
