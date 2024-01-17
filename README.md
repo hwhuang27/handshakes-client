@@ -2,9 +2,15 @@
 
 A real-time messaging app created with Socket.io
 
-[Live site on GitHub Pages.](https://hwhuang27.github.io/messenger-client/)
+[Live site on GitHub Pages.](https://hwhuang27.github.io/handshakes-client/)
 
-[Backend API repo can be found here.](https://github.com/hwhuang27/messenger-api)
+[Backend API repo can be found here.](https://github.com/hwhuang27/handshakes-api)
+
+## 🛠️ Features 🛠️
+- Real-time 2-way direct messaging system
+- Interactive and colorful UI
+- New account sign-up / login authentication
+- Over 10 avatars to customize your profile with
 
 ## 🛠️ Built with... 🛠️
 
@@ -17,10 +23,8 @@ A real-time messaging app created with Socket.io
 
 ## 📷 Screenshots 📷
 
-![Chat](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/chat.png)
+![Chat](https://raw.githubusercontent.com/hwhuang27/handshakes-client/main/public/screenshots/chat.png)
 
-![Login](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/login.png)
+![Login](https://raw.githubusercontent.com/hwhuang27/handshakes-client/main/public/screenshots/login.png)
 
-![Register](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/register.png)
-
-![EditProfile](https://raw.githubusercontent.com/hwhuang27/messenger-client/main/public/screenshots/profile.png)
+![Register](https://raw.githubusercontent.com/hwhuang27/handshakes-client/main/public/screenshots/register.png)
